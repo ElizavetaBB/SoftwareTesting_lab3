@@ -71,7 +71,7 @@ public class LoginTest {
         Assertions.assertEquals(expected,loginPage.getRegErrorMes().findElement(By.tagName("font")).getText());
     }
 
-    @DisplayName("Test authification limit")
+    @DisplayName("Test authentication limit")
     @Test
     public void testAuthificationLimit(){
         loginPage.inputLogin(ConfProperties.getProperty("limitLogin"));

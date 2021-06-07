@@ -17,12 +17,8 @@ public class EditProfilePage {
 
     }
 
-    public void inputName(String name){
-        this.name.sendKeys(name);
-    }
-
-    public void clickSaveButton(){
-        saveButton.click();
+    public WebElement getSaveButton(){
+        return saveButton;
     }
 
     public WebElement getName(){

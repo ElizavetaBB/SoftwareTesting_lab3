@@ -34,7 +34,6 @@ public class RegistrationTest {
         registrationPage=new RegistrationPage(driver);
     }
 
-
     @DisplayName("Test right registration")
     @Test
     public void testPassedRegistration(){

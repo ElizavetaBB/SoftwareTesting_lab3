@@ -47,8 +47,12 @@ public class SubscriptionsTest {
         int current=subscriptionsPage.getCountOfSubscr(true);
         int previous=subscriptionsPage.getCountOfSubscr(false);
         subscriptionsPage.unsubscribe();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        Assertions.assertEquals(current-1,subscriptionsPage.getCountOfSubscr(true));
-        Assertions.assertEquals(previous+1,subscriptionsPage.getCountOfSubscr(false));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://subscribe.ru/member/issue");
+        driver.navigate().to(driver.getCurrentUrl());
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        subscriptionsPage = new SubscriptionsPage(driver);
+        Assertions.assertEquals(current - 1, subscriptionsPage.getCountOfSubscr(true));
+        Assertions.assertEquals(previous + 1, subscriptionsPage.getCountOfSubscr(false));
     }
 }
