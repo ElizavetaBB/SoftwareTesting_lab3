@@ -13,6 +13,25 @@ public class SelectionsPage {
     private WebElement title;
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/a[2]")
     private WebElement articleLink;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[1]/a")
+    private WebElement createButton;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/ul/li[1]/div/a")
+    private WebElement firstSelection;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[1]")
+    private WebElement addToSelectionLink;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[6]/div[1]/div/form/div/a[1]")
+    private WebElement selectionContainerLink;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[4]/div[1]/div[1]/div/form/div[2]/button[2]")
+    private WebElement addToSelectionButton;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[3]/div/div/ul/li[1]/div/a")
+    private WebElement mySelection;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/a[2]/h1[1]")
+    private WebElement newsTitle;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[5]")
+    private WebElement like;
+    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[3]/div/div/ul/li[2]/div/a")
+    private WebElement myFavorite;
+
 
     public SelectionsPage(WebDriver webDriver){
         PageFactory.initElements(webDriver,this);
@@ -33,4 +52,39 @@ public class SelectionsPage {
         executor.executeScript("arguments[0].click();", ele);
     }
 
+    public void clickCreateButton(){
+        createButton.click();
+    }
+
+    public void clickFirstSelection(){
+        firstSelection.click();
+    }
+
+    public void clickAddToSelectionLink(){
+        addToSelectionLink.click();
+    }
+
+    public void clickSelectionContainerLink(){
+        selectionContainerLink.click();
+    }
+
+    public void clickAddToSelectionButton(){
+        addToSelectionButton.click();
+    }
+
+    public void clickMySelection(){
+        mySelection.click();
+    }
+
+    public WebElement getNewsTitle(){
+        return newsTitle;
+    }
+
+    public WebElement getLike(){
+        return like;
+    }
+
+    public void clickMyFavorite(){
+        myFavorite.click();
+    }
 }

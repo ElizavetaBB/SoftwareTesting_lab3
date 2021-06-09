@@ -19,8 +19,8 @@ public class LoginPage {
     private WebElement loginButton;
     @FindBy(xpath = "//*[@id=\"auth_msg\"]")
     private WebElement regErrorMes;
-    @FindBy(xpath = "//*[@id=\"js_tab_auth\"]/a")
-    private WebElement authLink;
+    @FindBy(xpath = "/html/body/div[7]/div/div/ul/li[1]/a")
+    private WebElement authLink;// //*[@id="js_tab_auth"]/a
 
     public LoginPage(WebDriver driver){
         PageFactory.initElements(driver,this);
@@ -60,4 +60,5 @@ public class LoginPage {
     public WebElement getAuthLink(){
         return authLink;
     }
+
 }

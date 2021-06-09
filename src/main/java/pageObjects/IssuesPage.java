@@ -1,11 +1,15 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class IssuesPage {
+    private WebDriver webDriver;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/ul/li[1]/a")
     private WebElement mainMenuLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/div/a")
@@ -14,11 +18,11 @@ public class IssuesPage {
     private WebElement themeLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[4]/div/div[1]/div[1]/div[1]/span/a")
     private WebElement groupLink;
-    @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/ul/li[2]/a")
+    @FindBy(xpath = "/html/body/div[1]/section/div[1]/div/ul/li[2]/a")
     private WebElement mailingCatalogLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[3]/ul/li[1]/a")
     private WebElement mailingGoldCategory;
-    @FindBy(xpath = "//*[@id=\"all\"]/section/div[4]/div/div[2]/div[3]/ul/li[5]/a")
+    @FindBy(xpath = "/html/body/div[1]/section/div[4]/div/div[2]/div[3]/ul/li[5]/a")//
     private WebElement activityLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[4]/div/div[1]/div[1]/div/div[4]/span")
     private WebElement topActivityElement;
@@ -29,9 +33,9 @@ public class IssuesPage {
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[2]/div/div[2]/div[2]/div[2]/h2")
     private WebElement articleHeader;
 
-
     public IssuesPage(WebDriver webDriver){
         PageFactory.initElements(webDriver,this);
+        this.webDriver=webDriver;
     }
 
     public WebElement getMainMenuLink(){
@@ -58,8 +62,11 @@ public class IssuesPage {
         return mailingGoldCategory;
     }
 
-    public void clickActivityLing(){
-        activityLink.click();
+    public void clickActivityLink(){
+        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[1]/section/div[4]/div/div[2]/div[3]/ul/li[5]/a"));
+        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+        executor.executeScript("arguments[0].scrollIntoView();", ele);
+        executor.executeScript("arguments[0].click();", ele);
     }
 
     public int[] getActivityIndicators() {

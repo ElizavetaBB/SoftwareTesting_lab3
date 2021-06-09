@@ -26,9 +26,9 @@ public class EditProfileTest {
         mainPage.clickLoginLink();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage=new LoginPage(driver);
-        loginPage.getLoginField().sendKeys(ConfProperties.getProperty("login"));//inputLogin(ConfProperties.getProperty("login"));
-        loginPage.getPasswordField().sendKeys(ConfProperties.getProperty("password"));//inputPassword(ConfProperties.getProperty("password"));
-        loginPage.getLoginButton().click();//clickLoginButton();
+        loginPage.getLoginField().sendKeys(ConfProperties.getProperty("login"));
+        loginPage.getPasswordField().sendKeys(ConfProperties.getProperty("password"));
+        loginPage.getLoginButton().click();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         mainProfilePage=new MainProfilePage(driver);
         mainProfilePage.clickProfileMenu();
@@ -48,7 +48,7 @@ public class EditProfileTest {
     public void testChangeName(){
         String previous=editProfilePage.getName().getAttribute("value");
         String expected=previous+ConfProperties.getProperty("changeName");
-        editProfilePage.getName().sendKeys(ConfProperties.getProperty("changeName"));//inputName(ConfProperties.getProperty("changeName"));
+        editProfilePage.getName().sendKeys(ConfProperties.getProperty("changeName"));
         editProfilePage.getSaveButton().click();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         Assertions.assertEquals(expected,editProfilePage.getName().getAttribute("value"));

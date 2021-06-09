@@ -17,6 +17,12 @@ public class MainProfilePage {
     @FindBy(xpath = "/html/body/div[1]/header/div[4]/ul")// //*[@id="logged_list"]
     private List<WebElement> loggedList;
     private List<WebElement> loggedItems;
+    @FindBy(xpath = "//*[@id=\"all\"]/header/div[1]/div/ul/li[1]/span/a")
+    private WebElement issuesLink;
+    @FindBy(xpath = "//*[@id=\"all\"]/header/div[1]/div/ul/li[2]/span/a")
+    private WebElement groupsLink;
+    @FindBy(xpath = "//*[@id=\"all\"]/header/div[1]/div/ul/li[3]/span/a")
+    private WebElement selections;
 
     public MainProfilePage(WebDriver webDriver){
         PageFactory.initElements(webDriver,this);
@@ -37,4 +43,15 @@ public class MainProfilePage {
         loggedItems.get(1).findElement(By.tagName("a")).click();
     }
 
+    public void clickIssuesLink(){
+        issuesLink.click();
+    }
+
+    public void clickGroupsLink(){
+        groupsLink.click();
+    }
+
+    public void clickSelectionsLink(){
+        selections.click();
+    }
 }

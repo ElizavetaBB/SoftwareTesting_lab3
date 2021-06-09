@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,18 +38,23 @@ public class MainPage {
         loginLink.click();
     }
 
-    public void clickRegistartionLink(){
+    public void clickRegistrationLink(){
         clickLoginLink();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        /*WebElement ele = webDriver.findElement(By.xpath("//*[@id=\"js_tab_reg\"]"));
+        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+        executor.executeScript("arguments[0].click();", ele);*/
         registrationLink.click();
     }
 
     public void clickIssuesLink(){
         issuesLink.click();
     }
+
     public void clickGroupsLink(){
         groupsLink.click();
     }
+
     public void clickSelectionsLink(){
         selections.click();
     }

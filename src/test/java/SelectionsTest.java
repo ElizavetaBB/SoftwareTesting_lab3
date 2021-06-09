@@ -1,20 +1,19 @@
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pageObjects.MainPage;
-import pageObjects.SelectionsPage;
+import pageObjects.*;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class SelectionsTest {
     private static WebDriver driver;
-    private static MainPage mainPage;
+    private MainPage mainPage;
     private String expected;
-    private static SelectionsPage selectionsPage;
-    @BeforeAll
-    public static void init(){
+    private SelectionsPage selectionsPage;
+    @BeforeEach
+    public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
         driver=new ChromeDriver();
         driver.manage().window().maximize();
@@ -23,14 +22,15 @@ public class SelectionsTest {
         mainPage=new MainPage(driver);
     }
 
-    @AfterAll
-    public static void close(){
+    @AfterEach
+    public void close(){
         driver.close();
     }
 
     @DisplayName("Test SelectionsPage is visible")
     @Test
     public void testSeeSelectionsPage(){
+        System.out.println(driver.getCurrentUrl());
         mainPage.clickSelectionsLink();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         selectionsPage=new SelectionsPage(driver);
@@ -52,6 +52,73 @@ public class SelectionsTest {
         selectionsPage=new SelectionsPage(driver);
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         Assertions.assertEquals(expected, driver.getCurrentUrl());
+        driver.close();
+        driver.switchTo().window(newTab.get(0));
     }
 
+
+    @Nested
+    @DisplayName("IssuesTest with authentication")
+    class AuthenticatedGroupsTest{
+
+        @BeforeEach
+        public void init(){
+            driver.get(ConfProperties.getProperty("mainpage"));
+            mainPage.clickLoginLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            LoginPage loginPage=new LoginPage(driver);
+            loginPage.inputLogin(ConfProperties.getProperty("login"));
+            loginPage.inputPassword(ConfProperties.getProperty("password"));
+            loginPage.clickLoginButton();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            MainProfilePage mainProfilePage=new MainProfilePage(driver);
+            mainProfilePage.clickSelectionsLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage=new SelectionsPage(driver);
+        }
+
+        @DisplayName("Test create an issue with authentication")
+        @Test
+        public void testAuthenticatedCreateGroup(){
+            selectionsPage.clickCreateButton();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            NewSelectionsPage newSelectionsPage=new NewSelectionsPage(driver);
+            expected="Создание новой подборки";
+            Assertions.assertEquals(expected,newSelectionsPage.getTitle().getText().trim());
+        }
+
+        @DisplayName("Test add to a selection")
+        @Test
+        public void testAddToSelection(){
+            selectionsPage.clickFirstSelection();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            expected=selectionsPage.getNewsTitle().getText().trim();
+            selectionsPage=new SelectionsPage(driver);
+            selectionsPage.clickAddToSelectionLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage.clickSelectionContainerLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage.clickAddToSelectionButton();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage=new SelectionsPage(driver);
+            selectionsPage.clickMySelection();
+            Assertions.assertEquals(expected,selectionsPage.getNewsTitle().getText().trim());
+        }
+
+        @DisplayName("Test like news")
+        @Test
+        public void testClickLike(){
+            selectionsPage.clickFirstSelection();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            expected=selectionsPage.getNewsTitle().getText().trim();
+            selectionsPage=new SelectionsPage(driver);
+            selectionsPage.getLike().click();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            System.out.println(selectionsPage.getLike().findElement(By.tagName("span")).getAttribute("class"));
+            selectionsPage.clickMyFavorite();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage=new SelectionsPage(driver);
+            Assertions.assertEquals(expected,selectionsPage.getNewsTitle().getText().trim());
+        }
+    }
 }

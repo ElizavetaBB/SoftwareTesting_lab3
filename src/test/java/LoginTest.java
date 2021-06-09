@@ -63,7 +63,7 @@ public class LoginTest {
     @DisplayName("Test failed password")
     @Test
     public void testFailedPassword(){
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
+        loginPage.inputLogin(ConfProperties.getProperty("failedPasswordLogin"));
         loginPage.inputPassword(ConfProperties.getProperty("failedPassword"));
         loginPage.clickLoginButton();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -73,7 +73,7 @@ public class LoginTest {
 
     @DisplayName("Test authentication limit")
     @Test
-    public void testAuthificationLimit(){
+    public void testAuthenticationLimit(){
         loginPage.inputLogin(ConfProperties.getProperty("limitLogin"));
         loginPage.inputPassword(ConfProperties.getProperty("failedPassword"));
         loginPage.clickLoginButton();
@@ -86,6 +86,9 @@ public class LoginTest {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         loginPage.clickLoginButton();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        loginPage.clickLoginButton();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        loginPage=new LoginPage(driver);
         String expected="Исчерпан лимит неудачных попыток авторизации. Сервис будет доступен через час";
         Assertions.assertEquals(expected,loginPage.getRegErrorMes().findElement(By.tagName("font")).getText());
     }

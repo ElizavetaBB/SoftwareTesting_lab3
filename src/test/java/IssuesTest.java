@@ -77,13 +77,13 @@ public class IssuesTest {
     @Test
     public void testRangeCatalogByActivity(){
         mainPage.clickIssuesLink();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         issuesPage=new IssuesPage(driver);
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         issuesPage.clickMailingCatalogLink();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         issuesPage=new IssuesPage(driver);
-        issuesPage.clickActivityLing();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        issuesPage.clickActivityLink();
+        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         issuesPage=new IssuesPage(driver);
         int[] indic=issuesPage.getActivityIndicators();
         Assertions.assertTrue(indic[0]>=indic[1]);
@@ -100,5 +100,37 @@ public class IssuesTest {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         issuesPage=new IssuesPage(driver);
         Assertions.assertEquals(expected, issuesPage.getArticleHeader().getText().trim());
+    }
+
+    @Nested
+    @DisplayName("IssuesTest with authentication")
+    class AuthenticatedGroupsTest{
+
+        @BeforeEach
+        public void init(){
+            driver.get(ConfProperties.getProperty("mainpage"));
+            mainPage.clickLoginLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            LoginPage loginPage=new LoginPage(driver);
+            loginPage.inputLogin(ConfProperties.getProperty("login"));
+            loginPage.inputPassword(ConfProperties.getProperty("password"));
+            loginPage.clickLoginButton();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            MainProfilePage mainProfilePage=new MainProfilePage(driver);
+            mainProfilePage.clickIssuesLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            issuesPage=new IssuesPage(driver);
+        }
+
+        @DisplayName("Test create an issue with authentication")
+        @Test
+        public void testAuthenticatedCreateGroup(){
+            issuesPage.clickCreateMailingButton();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            NewIssuesPage newIssuesPage=new NewIssuesPage(driver);
+            expected="Выберите тип создаваемой рассылки";
+            Assertions.assertEquals(expected,newIssuesPage.getTitle().getText().trim());
+        }
+
     }
 }
