@@ -11,10 +11,9 @@ import java.util.List;
 
 public class MainProfilePage {
     private WebDriver webDriver;
-    private WebDriverWait wait;
-    @FindBy(xpath = "/html/body/div[1]/header/ul/li[1]/a")// //*[@id="all"]/header/ul/li[1]/a
+    @FindBy(xpath = "/html/body/div[1]/header/ul/li[1]/a")
     private WebElement profileMenu;
-    @FindBy(xpath = "/html/body/div[1]/header/div[4]/ul")// //*[@id="logged_list"]
+    @FindBy(xpath = "/html/body/div[1]/header/div[4]/ul")
     private List<WebElement> loggedList;
     private List<WebElement> loggedItems;
     @FindBy(xpath = "//*[@id=\"all\"]/header/div[1]/div/ul/li[1]/span/a")
@@ -23,11 +22,14 @@ public class MainProfilePage {
     private WebElement groupsLink;
     @FindBy(xpath = "//*[@id=\"all\"]/header/div[1]/div/ul/li[3]/span/a")
     private WebElement selections;
+    @FindBy(xpath = "//*[@id=\"all\"]/header/ul/li[1]/a")
+    private WebElement loginLink;
+    @FindBy(xpath = "//*[@id=\"logged_list\"]/li[9]/a")
+    private WebElement exitLink;
 
     public MainProfilePage(WebDriver webDriver){
         PageFactory.initElements(webDriver,this);
         this.webDriver=webDriver;
-        wait=new WebDriverWait(webDriver,30);
         loggedItems=loggedList.get(0).findElements(By.tagName("li"));
     }
 
@@ -53,5 +55,13 @@ public class MainProfilePage {
 
     public void clickSelectionsLink(){
         selections.click();
+    }
+
+    public void clickExitLink(){
+        exitLink.click();
+    }
+
+    public void clickLoginLink(){
+        loginLink.click();
     }
 }

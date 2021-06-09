@@ -62,7 +62,7 @@ public class GroupsPage {
     }
 
     public WebElement getWarningMessage() {
-        return warningMessage;//материалы доступны только ее учатсникам.
+        return warningMessage;
     }
 
     public WebElement getThemeTitle(){

@@ -9,6 +9,7 @@ public class GroupsTest {
     protected MainPage mainPage;
     protected String expected;
     protected GroupsPage groupsPage;
+
     @BeforeEach
     public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));

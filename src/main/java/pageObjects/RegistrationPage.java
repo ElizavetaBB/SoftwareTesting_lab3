@@ -12,19 +12,19 @@ public class RegistrationPage {
     private WebDriverWait wait;
     @FindBy(xpath = "//*[@id=\"js_tab_auth\"]")
     private WebElement loginForm;
-    @FindBy(xpath="//*[@id=\"arfemail\"]")// //*[@id="arfemail"]
+    @FindBy(xpath="//*[@id=\"arfemail\"]")
     private WebElement emailField;
-    @FindBy(xpath="//*[@id=\"js_tap_panel_checkbox_terms\"]")// //*[@id="js_tap_panel_checkbox_terms"]
+    @FindBy(xpath="//*[@id=\"js_tap_panel_checkbox_terms\"]")
     private WebElement agreeField1;
-    @FindBy(xpath = "//*[@id=\"js_tap_panel_checkbox_personal\"]")// //*[@id="js_tap_panel_checkbox_personal"]
+    @FindBy(xpath = "//*[@id=\"js_tap_panel_checkbox_personal\"]")
     private WebElement agreeField2;
-    @FindBy(xpath = "//*[@id=\"js_regFormBut\"]")// //*[@id="js_regFormBut"]
+    @FindBy(xpath = "//*[@id=\"js_regFormBut\"]")
     private WebElement regButton;
-    @FindBy(xpath = "//*[@id=\"reg_msg\"]") ////*[@id="reg_msg"]
+    @FindBy(xpath = "//*[@id=\"reg_msg\"]")
     private WebElement errorMes1;
-    @FindBy(xpath = "//*[@id=\"reg_msg2\"]") // //*[@id="reg_msg2"]
+    @FindBy(xpath = "//*[@id=\"reg_msg2\"]")
     private WebElement errorMes2;
-    @FindBy(xpath = "//*[@id=\"js_tap_panel_auth\"]/p") // //*[@id="js_tap_panel_auth"]/p
+    @FindBy(xpath = "//*[@id=\"js_tap_panel_auth\"]/p")
     private WebElement regDescription;
 
     public RegistrationPage(WebDriver driver){

@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.*;
@@ -30,7 +29,6 @@ public class SelectionsTest {
     @DisplayName("Test SelectionsPage is visible")
     @Test
     public void testSeeSelectionsPage(){
-        System.out.println(driver.getCurrentUrl());
         mainPage.clickSelectionsLink();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         selectionsPage=new SelectionsPage(driver);
@@ -87,7 +85,7 @@ public class SelectionsTest {
             Assertions.assertEquals(expected,newSelectionsPage.getTitle().getText().trim());
         }
 
-        @DisplayName("Test add to a selection")
+        @DisplayName("Test add to a selection and like")
         @Test
         public void testAddToSelection(){
             selectionsPage.clickFirstSelection();
@@ -100,21 +98,13 @@ public class SelectionsTest {
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             selectionsPage.clickAddToSelectionButton();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            selectionsPage=new SelectionsPage(driver);
-            selectionsPage.clickMySelection();
-            Assertions.assertEquals(expected,selectionsPage.getNewsTitle().getText().trim());
-        }
-
-        @DisplayName("Test like news")
-        @Test
-        public void testClickLike(){
-            selectionsPage.clickFirstSelection();
-            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            expected=selectionsPage.getNewsTitle().getText().trim();
-            selectionsPage=new SelectionsPage(driver);
             selectionsPage.getLike().click();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            System.out.println(selectionsPage.getLike().findElement(By.tagName("span")).getAttribute("class"));
+            selectionsPage=new SelectionsPage(driver);
+            selectionsPage.clickMySelection();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            selectionsPage=new SelectionsPage(driver);
+            Assertions.assertEquals(expected,selectionsPage.getNewsTitle().getText().trim());
             selectionsPage.clickMyFavorite();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             selectionsPage=new SelectionsPage(driver);

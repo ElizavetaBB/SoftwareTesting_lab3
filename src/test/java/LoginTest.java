@@ -47,6 +47,11 @@ public class LoginTest {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         String expected="Мой профиль";
         Assertions.assertEquals(expected,mainProfilePage.getMyProfileLink().getText());
+        mainProfilePage=new MainProfilePage(driver);
+        mainProfilePage.clickLoginLink();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        mainProfilePage.clickExitLink();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
     }
 
     @DisplayName("Test failed login")

@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.MainPage;
 import pageObjects.RegistrationPage;
@@ -14,32 +12,29 @@ public class RegistrationTest {
     public static RegistrationPage registrationPage;
     public static WebDriver driver;
 
-    @BeforeAll
-    public static void init(){
+    @BeforeEach
+    public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
         driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("mainpage"));
         mainPage=new MainPage(driver);
-    }
-
-    @AfterAll
-    public static void close(){
-        driver.close();
-    }
-
-    @BeforeEach
-    public void setRegistrationPage(){
         driver.get(ConfProperties.getProperty("mainpage"));
         mainPage.clickRegistrationLink();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         registrationPage=new RegistrationPage(driver);
+    }
+
+    @AfterEach
+    public void close(){
+        driver.close();
     }
 
     @DisplayName("Test right registration")
     @Test
     public void testPassedRegistration(){
-        registrationPage.inputEmail(ConfProperties.getProperty("limitLogin"));
+        registrationPage.inputEmail(ConfProperties.getProperty("rightRegistrationLogin"));
         registrationPage.setAgreeField1();
         registrationPage.setAgreeField2();
         registrationPage.clickRegButton();
@@ -51,7 +46,7 @@ public class RegistrationTest {
     @DisplayName("Test failed checkboxes")
     @Test
     public void testFailedCheckBoxes(){
-        registrationPage.inputEmail(ConfProperties.getProperty("failedEmail"));
+        registrationPage.inputEmail(ConfProperties.getProperty("rightRegistrationLogin"));
         registrationPage.clickRegButton();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         Assertions.assertNotNull(registrationPage.getErrorMes1().findElement(By.tagName("font")).getText());

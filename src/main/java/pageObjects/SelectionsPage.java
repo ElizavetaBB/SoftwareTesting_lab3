@@ -15,7 +15,7 @@ public class SelectionsPage {
     private WebElement articleLink;
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[1]/a")
     private WebElement createButton;
-    @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/ul/li[1]/div/a")
+    @FindBy(xpath = "//*[@id=\"tree_box\"]/div/div[2]/ul/li[1]/div/a")
     private WebElement firstSelection;
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[1]")
     private WebElement addToSelectionLink;

@@ -7,10 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class EditProfilePage {
     private WebDriver driver;
-    @FindBy(xpath = "/html/body/div[1]/section/div[2]/div/div/div[3]/div/div[2]/div/form/div[1]/input") // //*[@id="profile_name"]
+    @FindBy(xpath = "/html/body/div[1]/section/div[2]/div/div/div[3]/div/div[2]/div/form/div[1]/input")
     private WebElement name;
-    @FindBy(xpath = "/html/body/div[1]/section/div[2]/div/div/div[3]/div/div[2]/div/form/p[2]/input")// //*[@id="all"]/section/div[2]/div/div/div[3]/div/div[2]/div/form/p[2]/input
+    @FindBy(xpath = "/html/body/div[1]/section/div[2]/div/div/div[3]/div/div[2]/div/form/p[2]/input")
     private WebElement saveButton;
+
     public EditProfilePage(WebDriver webDriver){
         PageFactory.initElements(webDriver,this);
         driver=webDriver;

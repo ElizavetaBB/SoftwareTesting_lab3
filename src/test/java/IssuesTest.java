@@ -9,8 +9,8 @@ public class IssuesTest {
     private static MainPage mainPage;
     private String expected;
     private static IssuesPage issuesPage;
-    @BeforeAll
-    public static void init(){
+    @BeforeEach
+    public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
         driver=new ChromeDriver();
         driver.manage().window().maximize();
@@ -19,8 +19,8 @@ public class IssuesTest {
         mainPage=new MainPage(driver);
     }
 
-    @AfterAll
-    public static void close(){
+    @AfterEach
+    public void close(){
         driver.close();
     }
 
@@ -130,6 +130,23 @@ public class IssuesTest {
             NewIssuesPage newIssuesPage=new NewIssuesPage(driver);
             expected="Выберите тип создаваемой рассылки";
             Assertions.assertEquals(expected,newIssuesPage.getTitle().getText().trim());
+        }
+
+        @DisplayName("Test subscribe an issue")
+        @Test
+        public void testSubscribeIssue(){
+            issuesPage.clickAllIssuesLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            expected=issuesPage.getSubscribeLinkHeader().getText().trim();
+            issuesPage.clickSubscribeLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            issuesPage=new IssuesPage(driver);
+            issuesPage.clickLoginLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            issuesPage.clickMyIssuesLink();
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+            SubscriptionsPage subscriptionsPage=new SubscriptionsPage(driver);
+            Assertions.assertEquals(expected,subscriptionsPage.getNewIssueLink().getText().trim());
         }
 
     }
