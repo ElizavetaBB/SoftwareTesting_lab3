@@ -5,10 +5,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class IssuesPage {
-    private WebDriver webDriver;
+public class IssuesPage extends Page{
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/ul/li[1]/a")
     private WebElement mainMenuLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/div/a")
@@ -43,8 +41,7 @@ public class IssuesPage {
     private WebElement myIssuesLink;
 
     public IssuesPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver,this);
-        this.webDriver=webDriver;
+        super(webDriver);
     }
 
     public WebElement getMainMenuLink(){
@@ -72,7 +69,8 @@ public class IssuesPage {
     }
 
     public void clickActivityLink(){
-        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[1]/section/div[4]/div/div[2]/div[3]/ul/li[5]/a"));
+        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[1]/" +
+                "section/div[4]/div/div[2]/div[3]/ul/li[5]/a"));
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].scrollIntoView();", ele);
         executor.executeScript("arguments[0].click();", ele);

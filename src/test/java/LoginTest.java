@@ -95,6 +95,7 @@ public class LoginTest {
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         loginPage=new LoginPage(driver);
         String expected="Исчерпан лимит неудачных попыток авторизации. Сервис будет доступен через час";
+        System.out.println(loginPage.getRegErrorMes().findElement(By.tagName("font")));
         Assertions.assertEquals(expected,loginPage.getRegErrorMes().findElement(By.tagName("font")).getText());
     }
 

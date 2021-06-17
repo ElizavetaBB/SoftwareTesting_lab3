@@ -6,9 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 public class IssuesTest {
     private static WebDriver driver;
-    private static MainPage mainPage;
+    private MainPage mainPage;
     private String expected;
-    private static IssuesPage issuesPage;
+    private IssuesPage issuesPage;
+
     @BeforeEach
     public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
@@ -146,7 +147,7 @@ public class IssuesTest {
             issuesPage.clickMyIssuesLink();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             SubscriptionsPage subscriptionsPage=new SubscriptionsPage(driver);
-            Assertions.assertEquals(expected,subscriptionsPage.getNewIssueLink().getText().trim());
+            Assertions.assertTrue(subscriptionsPage.getNewIssueLink().getText().contains(expected));
         }
 
     }

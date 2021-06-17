@@ -3,12 +3,10 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegistrationPage {
-    private WebDriver driver;
+public class RegistrationPage extends Page{
     private WebDriverWait wait;
     @FindBy(xpath = "//*[@id=\"js_tab_auth\"]")
     private WebElement loginForm;
@@ -27,10 +25,9 @@ public class RegistrationPage {
     @FindBy(xpath = "//*[@id=\"js_tap_panel_auth\"]/p")
     private WebElement regDescription;
 
-    public RegistrationPage(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        this.driver=driver;
-        wait=new WebDriverWait(driver,30);
+    public RegistrationPage(WebDriver webDriver){
+        super(webDriver);
+        wait=new WebDriverWait(webDriver,30);
     }
 
     public void inputEmail(String login){

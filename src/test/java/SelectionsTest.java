@@ -11,6 +11,7 @@ public class SelectionsTest {
     private MainPage mainPage;
     private String expected;
     private SelectionsPage selectionsPage;
+
     @BeforeEach
     public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
@@ -89,8 +90,7 @@ public class SelectionsTest {
         @Test
         public void testAddToSelection(){
             selectionsPage.clickFirstSelection();
-            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            expected=selectionsPage.getNewsTitle().getText().trim();
+            driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
             selectionsPage=new SelectionsPage(driver);
             selectionsPage.clickAddToSelectionLink();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -98,9 +98,10 @@ public class SelectionsTest {
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             selectionsPage.clickAddToSelectionButton();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            selectionsPage.getLike().click();
+            selectionsPage.clickLike();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             selectionsPage=new SelectionsPage(driver);
+            expected=selectionsPage.getNewsTitle().getText().trim();
             selectionsPage.clickMySelection();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             selectionsPage=new SelectionsPage(driver);

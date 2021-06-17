@@ -5,10 +5,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class SelectionsPage {
-    private WebDriver webDriver;
+public class SelectionsPage extends Page{
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[2]/div/a/h1")
     private WebElement title;
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/a[2]")
@@ -31,11 +29,12 @@ public class SelectionsPage {
     private WebElement like;
     @FindBy(xpath = "/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[3]/div/div/ul/li[2]/div/a")
     private WebElement myFavorite;
+    private final JavascriptExecutor executor;
 
 
     public SelectionsPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver,this);
-        this.webDriver=webDriver;
+        super(webDriver);
+        executor=(JavascriptExecutor) webDriver;
     }
 
     public WebElement getTitle(){
@@ -48,24 +47,31 @@ public class SelectionsPage {
 
     public void clickArticleLink(){
         WebElement ele = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/a[2]"));
-        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", ele);
     }
 
     public void clickCreateButton(){
-        createButton.click();
+        //createButton.click();
+        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[1]/a"));
+        executor.executeScript("arguments[0].click();", ele);
     }
 
     public void clickFirstSelection(){
-        firstSelection.click();
+        //firstSelection.click();
+        WebElement ele = webDriver.findElement(By.xpath("//*[@id=\"tree_box\"]/div/div[2]/ul/li[1]/div/a"));
+        executor.executeScript("arguments[0].click();", ele);
     }
 
     public void clickAddToSelectionLink(){
         addToSelectionLink.click();
+        /*WebElement ele = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[1]"));
+        executor.executeScript("arguments[0].click();", ele);*/
     }
 
     public void clickSelectionContainerLink(){
-        selectionContainerLink.click();
+        //selectionContainerLink.click();
+        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[6]/div[1]/div/form/div/a[1]"));
+        executor.executeScript("arguments[0].click();", ele);
     }
 
     public void clickAddToSelectionButton(){
@@ -80,8 +86,9 @@ public class SelectionsPage {
         return newsTitle;
     }
 
-    public WebElement getLike(){
-        return like;
+    public void clickLike(){
+        WebElement ele = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[3]/div/div[3]/div[1]/div[6]/div[5]"));
+        executor.executeScript("arguments[0].click();", ele);
     }
 
     public void clickMyFavorite(){

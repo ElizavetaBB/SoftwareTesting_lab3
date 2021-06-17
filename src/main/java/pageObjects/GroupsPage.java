@@ -5,12 +5,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class GroupsPage {
-    private WebDriver webDriver;
+public class GroupsPage extends Page{
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/ul/li[2]/a")
     private WebElement groupsCatalogLink;
     @FindBy(xpath = "//*[@id=\"all\"]/section/div[1]/div/div/a")
@@ -31,8 +29,7 @@ public class GroupsPage {
     private WebElement loginLink;
 
     public GroupsPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver,this);
-        this.webDriver=webDriver;
+        super(webDriver);
     }
 
     public WebElement getGroupsCatalogLink(){

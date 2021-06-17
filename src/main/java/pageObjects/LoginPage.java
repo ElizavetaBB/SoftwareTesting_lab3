@@ -3,12 +3,8 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class LoginPage extends Page{
     @FindBy(xpath = "//*[@id=\"js_tab_auth\"]")
     private WebElement loginForm;
     @FindBy(xpath="//*[@id=\"credential_0\"]")
@@ -22,10 +18,8 @@ public class LoginPage {
     @FindBy(xpath = "/html/body/div[7]/div/div/ul/li[1]/a")
     private WebElement authLink;
 
-    public LoginPage(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        this.driver=driver;
-        wait=new WebDriverWait(driver,30);
+    public LoginPage(WebDriver webDriver){
+        super(webDriver);
     }
 
     public WebElement getLoginField(){
@@ -39,7 +33,6 @@ public class LoginPage {
     public WebElement getLoginButton(){
         return loginButton;
     }
-
 
     public void inputLogin(String login){
         loginField.sendKeys(login);

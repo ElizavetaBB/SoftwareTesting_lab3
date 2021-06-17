@@ -1,19 +1,20 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class NewGroupsPage {
-    @FindBy(xpath = "//*[@id=\"all\"]/section/div[2]/div/h3")
+public class NewGroupsPage extends Page{
+    @FindBy(xpath = "/html/body/div[1]/section/div[2]/div/h3")
     private WebElement title;
 
     public NewGroupsPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver,this);
+        super(webDriver);
     }
 
     public WebElement getTitle(){
-        return title;
+        //return title;
+        return webDriver.findElement(By.xpath("/html/body/div[1]/section/div[2]/div/h3"));
     }
 }

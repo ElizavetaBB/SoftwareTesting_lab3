@@ -124,7 +124,6 @@ public class GroupsTest {
             myGroupsPage=new MyGroupsPage(driver);
             myGroupsPage.clickUnfollowLink();
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-            myGroupsPage=new MyGroupsPage(driver);
         }
     }
 }

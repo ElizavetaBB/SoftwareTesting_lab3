@@ -4,13 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
-public class MainProfilePage {
-    private WebDriver webDriver;
+public class MainProfilePage extends Page{
     @FindBy(xpath = "/html/body/div[1]/header/ul/li[1]/a")
     private WebElement profileMenu;
     @FindBy(xpath = "/html/body/div[1]/header/div[4]/ul")
@@ -28,8 +24,7 @@ public class MainProfilePage {
     private WebElement exitLink;
 
     public MainProfilePage(WebDriver webDriver){
-        PageFactory.initElements(webDriver,this);
-        this.webDriver=webDriver;
+        super(webDriver);
         loggedItems=loggedList.get(0).findElements(By.tagName("li"));
     }
 

@@ -6,14 +6,14 @@ import pageObjects.*;
 import java.util.concurrent.TimeUnit;
 
 public class SubscriptionsTest {
-    public static MainPage mainPage;
-    public static LoginPage loginPage;
-    public static MainProfilePage mainProfilePage;
-    public static SubscriptionsPage subscriptionsPage;
+    public MainPage mainPage;
+    public LoginPage loginPage;
+    public MainProfilePage mainProfilePage;
+    public SubscriptionsPage subscriptionsPage;
     public static WebDriver driver;
 
-    @BeforeAll
-    public static void init(){
+    @BeforeEach
+    public void init(){
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("webdriver"));
         driver=new ChromeDriver();
         driver.manage().window().maximize();
@@ -36,8 +36,8 @@ public class SubscriptionsTest {
         subscriptionsPage=new SubscriptionsPage(driver);
     }
 
-    @AfterAll
-    public static void close(){
+    @AfterEach
+    public void close(){
         driver.close();
     }
 

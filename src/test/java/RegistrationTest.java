@@ -8,8 +8,8 @@ import pageObjects.RegistrationPage;
 import java.util.concurrent.TimeUnit;
 
 public class RegistrationTest {
-    public static MainPage mainPage;
-    public static RegistrationPage registrationPage;
+    public MainPage mainPage;
+    public RegistrationPage registrationPage;
     public static WebDriver driver;
 
     @BeforeEach
@@ -20,7 +20,6 @@ public class RegistrationTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("mainpage"));
         mainPage=new MainPage(driver);
-        driver.get(ConfProperties.getProperty("mainpage"));
         mainPage.clickRegistrationLink();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         registrationPage=new RegistrationPage(driver);
